@@ -62,6 +62,36 @@ const posts = [
 ];
 
 
+//funzione presa da fonti esterne "https://codepen.io/sameer09/pen/ymBBMW"
+
+//creo funzione per iniziali
+let getInitials = function (name) {
+
+    //crea variabile che splitta (crea un array di parole)
+    let parts = name.split(' ');
+
+    //viene inizializzata una stringa vuota denominata initials che verrà utilizzata per accumulare le iniziali.
+    let initials = '';
+
+    //avvio un ciclo for che attraversa ciascun elemento dell'array parts (che contiene le parole).
+    for (let i = 0; i < parts.length; i++)
+  
+    {
+        // inizio una condizione che verifica se la lunghezza della parola corrente (parts[i]) è maggiore di zero e se non è una stringa vuota. Questa condizione è inclusa per assicurarsi di non aggiungere iniziali per le parole vuote.
+        if (parts[i].length > 0 && parts[i] !== '') {
+
+            // SE la condizione sopra è verificata, l'istruzione aggiunge il primo carattere della parola corrente (parts[i][0]) alla stringa initials. Questo è come viene ottenuta l'iniziale di ogni parola.
+            initials += parts[i][0]
+
+        }
+    }
+
+  //restituisce la stringa initials che ora contiene le iniziali di tutte le parole.
+  return initials;
+}
+
+
+
 //considero il container
 const containerPost = document.getElementById("container");
 
@@ -73,7 +103,7 @@ posts.forEach(post => {
             <div class="post__header">
                 <div class="post-meta">                    
                     <div class="post-meta__icon">
-                        <img class="profile-pic" src= ${post.author.image} alt="Phil Mangione">                    
+                    <img class="profile-pic" src=${post.author.image} alt="${getInitials(post.author.name)}">                   
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${post.author.name}</div>
@@ -162,5 +192,6 @@ function europaDate(date) {
     const dataEuropa = new Date(date).toLocaleDateString('it-IT',  { day: 'numeric', month: 'numeric', year: 'numeric' });
     return dataEuropa;
 }
+
 
 
