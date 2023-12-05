@@ -103,7 +103,7 @@ posts.forEach(post => {
     //Milestone 2 - Se clicchiamo sul tasto “Mi Piace” cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo. Salviamo in un secondo array gli id dei post ai quali iniziale dei like e inizializzo una variabile per il abbiamo messo il like.
    
     //prendo in considerazione il footer del progetto 
-    const footer = document.querySelector(".post__footer");
+    const footer = document.querySelectorAll(".post__footer");
 
     //creo un ciclo forEach per i bottoni
     footer.forEach(postFooter => {
@@ -114,7 +114,13 @@ posts.forEach(post => {
         //seleziono il contatore del like
         const likeCounter = postFooter.querySelector(".js-likes-counter")
 
-        let likes = parseInt(likeCounter);
+
+        //converto la stringa in numero.
+        let likes = parseInt(likeCounter.innerText);
+
+        console.log(likeCounter);  
+        
+        //inizzializzo del pulsante in false
         let clickButton = false;
 
 
@@ -122,12 +128,18 @@ posts.forEach(post => {
 
         likeButton.addEventListener("click", function(){
             
+             // cambia il colore del testo del pulsante e aggiorna il contatore dei likes
 
-            if(!clickButton){
+             //SE il pulsante è cliccato
+            if(!clickButton)
+            {
                 likeButton.style.color = 'blue';
                 clickButton = true;
                 likes++;
-            }else {
+
+            //ALTRIMENTI se non è cliccato o tolgo il click
+            } else 
+            {
                 likeButton.style.color = '#404040';
                 clickButton = false;
                 likes--;
