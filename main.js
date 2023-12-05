@@ -77,7 +77,7 @@ posts.forEach(post => {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${post.author.name}</div>
-                        <div class="post-meta__time">${post.created}</div>
+                        <div class="post-meta__time">${europaDate(post.created)}</div>
                     </div>                    
                 </div>
             </div>
@@ -156,5 +156,11 @@ posts.forEach(post => {
 
 })
 
+
+//funzione per inserire data europea
+function europaDate(date) {
+    const dataEuropa = new Date(date).toLocaleDateString('it-IT',  { day: 'numeric', month: 'numeric', year: 'numeric' });
+    return dataEuropa;
+}
 
 
