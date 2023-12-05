@@ -68,42 +68,81 @@ const containerPost = document.getElementById("container");
 posts.forEach(post => {
 
     containerPost.innerHTML +=
-        `
-    <div class="post">
-    <div class="post__header">
-        <div class="post-meta">                    
-            <div class="post-meta__icon">
-                <img class="profile-pic" src= ${post.author.image} alt="Phil Mangione">                    
-            </div>
-            <div class="post-meta__data">
-                <div class="post-meta__author">${post.author.name}</div>
-                <div class="post-meta__time">${post.created}</div>
-            </div>                    
-        </div>
-    </div>
-    <div class="post__text">${post.content}</div>
-    <div class="post__image">
-        <img src=${post.media} alt="">
-    </div>
-    <div class="post__footer">
-        <div class="likes js-likes">
-            <div class="likes__cta">
-                <a class="like-button  js-like-button" href="#" data-postid="1">
-                    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                    <span class="like-button__label">Mi Piace</span>
-                </a>
-            </div>
-            <div class="likes__counter">
-                Piace a <b id="like-counter-${post.id}" class="js-likes-counter">${post.likes}</b> persone
-            </div>
-        </div> 
-    </div>            
-</div>
-
-
     `
+        <div class="post">
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src= ${post.author.image} alt="Phil Mangione">                    
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${post.author.name}</div>
+                        <div class="post-meta__time">${post.created}</div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="post__text">${post.content}</div>
+            <div class="post__image">
+                <img src=${post.media} alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-${post.id}" class="js-likes-counter">${post.likes}</b> persone
+                    </div>
+                </div> 
+            </div>            
+        </div>
+    `
+    //Milestone 2 - Se clicchiamo sul tasto “Mi Piace” cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo. Salviamo in un secondo array gli id dei post ai quali iniziale dei like e inizializzo una variabile per il abbiamo messo il like.
+   
+    //prendo in considerazione il footer del progetto 
+    const footer = document.querySelector(".post__footer");
+
+    //creo un ciclo forEach per i bottoni
+    footer.forEach(postFooter => {
+
+        //seleziono il pulsante like
+        const likeButton = postFooter.querySelector(".js-like-button");
+
+        //seleziono il contatore del like
+        const likeCounter = postFooter.querySelector(".js-likes-counter")
+
+        let likes = parseInt(likeCounter);
+        let clickButton = false;
+
+
+        //al click del pulsante like
+
+        likeButton.addEventListener("click", function(){
+            
+
+            if(!clickButton){
+                likeButton.style.color = 'blue';
+                clickButton = true;
+                likes++;
+            }else {
+                likeButton.style.color = '#404040';
+                clickButton = false;
+                likes--;
+            }
+
+            // aggiorno il contatore dei like
+            likeCounter.innerText = likes;
+
+
+        }
+        )
+
+    })
 
 })
 
-//Milestone 2 - Se clicchiamo sul tasto “Mi Piace” cambiamo il colore al testo del bottone e incrementiamo il counter dei likes relativo. Salviamo in un secondo array gli id dei post ai quali abbiamo messo il like.
+
 
